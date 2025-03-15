@@ -5,12 +5,12 @@ import torch
 from pre_train import pretrain
 from model.GraphLoRA import transfer
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
     parser.add_argument('--pretrain_dataset', type=str, default='PubMed')
     parser.add_argument('--test_dataset', type=str, default='CiteSeer')
     parser.add_argument('--gpu_id', type=int, default=0)
+    parser.add_argument('--no-gpu', action='store_true', help='Use CPU instead of GPU')
     parser.add_argument('--pretext', type=str, default='GRACE')
     parser.add_argument('--config', type=str, default='./config.yaml')
     parser.add_argument('--is_pretrain', type=bool, default=False)
@@ -34,13 +34,16 @@ if __name__ == '__main__':
     parser.add_argument('--num_epochs', type=int, default=200)
     args = parser.parse_args()
 
-    assert args.gpu_id in range(0, 2)
-    torch.cuda.set_device(args.gpu_id)
+    device = torch.device('cpu') if args.no_gpu else torch.device(f'cuda:{args.gpu_id}')
+    
+    if not args.no_gpu:
+        assert args.gpu_id in range(0, 2)
+        torch.cuda.set_device(args.gpu_id)
 
     if args.is_pretrain:
         config_pretrain = yaml.load(open(args.config), Loader=SafeLoader)[args.pretrain_dataset]
-        pretrain(args.pretrain_dataset, args.pretext, config_pretrain, args.gpu_id, args.is_reduction)
+        pretrain(args.pretrain_dataset, args.pretext, config_pretrain, device, args.is_reduction)
     
     if args.is_transfer:
         config_transfer = yaml.load(open(args.config), Loader=SafeLoader)['transfer']
-        transfer(args, config_transfer, args.gpu_id, args.is_reduction)
+        transfer(args, config_transfer, device, args.is_reduction)

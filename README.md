@@ -8,6 +8,9 @@ torch==2.1.0
 cuda==12.1
 numpy==1.26.0
 torch_geometric==2.4.0
+pyyaml==6.0.1
+setuptools>=68.0.0
+packaging>=23.2
 ```
 
 ## How to Run

@@ -1,0 +1,52 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+
+# UV virtual environments
+.venv/
+
+# UV cache
+.cache/uv/
+.uv-cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.vs/
+
+# Logs
+*.log
+
+# Local environment
+.env
+.env.local
+
+# Model checkpoints and data
+checkpoints/
+data/
+pre_trained_gnn/
+datasets/
+*.pth
+*.pt
+*.ckpt
+
+# Operating System
+.DS_Store
+Thumbs.db
