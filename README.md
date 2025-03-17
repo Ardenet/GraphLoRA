@@ -1,4 +1,4 @@
-> This is the official project's fork. Added `uv` and CPU support for easier code replication.
+> This is the official project's fork. Added `uv` support for easier code replication.
 
 # GraphLoRA
 
@@ -16,7 +16,7 @@ setuptools>=68.0.0
 packaging>=23.2
 ```
 
-**If use GPU, please install cuda12.1.** Other versions don't guarantee whether they can run
+**If use GPU, please install cuda12.1.**
 
 ### Using `pip` and `conda`
 
@@ -48,16 +48,6 @@ python main.py --is_pretrain True
 
 # Fine-tuning
 python main.py --is_transfer True
-```
-
-If you use CPU, please use
-
-```shell
-# Pre-training
-python main.py --is_pretrain True --no-gpu
-
-# Fine-tuning
-python main.py --is_transfer True --no-gpu
 ```
 
 Please refer to the [main.py](./main.py) file for other options
