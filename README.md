@@ -1,8 +1,8 @@
+> This is the official project's fork. Added `uv` and CPU support for easier code replication.
+
 # GraphLoRA
 
 This is an official implementation of KDD 25 paper GraphLoRA: Structure-Aware Contrastive Low-Rank Adaptation for Cross-Graph Transfer Learning.
-
-> This is the official project's fork. Added `uv` and CPU support for easier code replication.
 
 ## Requirements
 
@@ -16,17 +16,12 @@ setuptools>=68.0.0
 packaging>=23.2
 ```
 
-**If use GPU, please install cuda12.1.** Other versions do not guarantee whether they can run
+**If use GPU, please install cuda12.1.** Other versions don't guarantee whether they can run
 
 ### Using `pip` and `conda`
 
 ```shell
-# If use CPU
-pip install -r requirements_cpu.txt
-
-# If use GPU
-pip install -r requirements_gpul.txt # Linux system
-pip install -r requirements_gpuw.txt # Windows system
+pip install -r requirements.txt -f 'https://mirrors.aliyun.com/pytorch-wheels/cu121/'
 
 # If you use conda, it is highly recommended to create a Python empty environment and use the above pip command to install dependencies 
 conda env create -n <env_name> "python==3.11.5"
@@ -35,13 +30,12 @@ conda env create -n <env_name> "python==3.11.5"
 ### Using `uv`
 
 ```shell
-# If use CPU
-uv sync --extra cpu
+# If you just want to synchronous enironment, you can try command below
+uv sync
 
-# If use GPU
-# !!! Because a bug about `uv sync` torch==2.1.0+cu121, Please distinguish your system
-uv sync --extra gpul # Linux system
-uv sync --extra gpuw # Windows system
+# But you should run this command when you just directly run code.
+# Don't worry environment's problems, uv will take care of everything for you
+uv run python main.py ...
 ```
 
 ## How to Run

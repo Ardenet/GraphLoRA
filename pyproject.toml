@@ -10,29 +10,12 @@ dependencies = [
     "setuptools>=68.0.0",
     "packaging>=23.2",
     "torch-geometric==2.4.0",
+    "torch==2.1.0; sys_platform == 'darwin'",
+    "torch==2.1.0+cu121; sys_platform != 'darwin'",
 ]
-
-[project.optional-dependencies]
-cpu = ["torch==2.1.0"]
-gpuw = ["torch==2.1.0+cu121; sys_platform == 'win32'"]
-gpul = ["torch==2.1.0+cu121; sys_platform == 'linux'"]
 
 [tool.uv]
-conflicts = [
-    [
-        { extra = "cpu" },
-        { extra = "gpuw" },
-        { extra = "gpul" },
-    ],
+find-links = [ "https://mirrors.aliyun.com/pytorch-wheels/cu121" ]
+dependency-metadata = [
+    { name = "torch", version = "2.1.0+cu121", requires-dist = [ "filelock", "fsspec", "jinja2", "networkx", "sympy", "triton; sys_platform == 'linux'", "typing-extensions"] }
 ]
-
-[tool.uv.sources]
-torch = [
-    { url = "https://mirrors.aliyun.com/pytorch-wheels/cu121/torch-2.1.0+cu121-cp311-cp311-win_amd64.whl", extra = "gpuw" },
-    { url = "https://mirrors.aliyun.com/pytorch-wheels/cu121/torch-2.1.0+cu121-cp311-cp311-linux_x86_64.whl", extra = "gpul" },
-]
-
-[[tool.uv.index]]
-name = "pytorch-cu121"
-url = "https://download.pytorch.org/whl/cu121"
-explicit = true
